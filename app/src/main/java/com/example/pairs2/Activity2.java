@@ -63,6 +63,25 @@ public class Activity2 extends AppCompatActivity {
         startActivity(i);
     }
 
+    // OnClick Clear all scores
+    public void clearScores(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("keyname1", "Brian");
+        editor.putInt("keyname2", 0);
+        editor.apply();
+
+        // refresh all scores
+        loadData ();
+        updateViews();
+        Toast.makeText(this, "high score cleared " , Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
 
 
     // persistent data addition

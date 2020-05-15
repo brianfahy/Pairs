@@ -203,7 +203,14 @@ public class Activity3 extends AppCompatActivity {
     public void endGame() {
         TextView scoreView = (TextView) findViewById(R.id.finish);
         scoreView.setText("Game Over");
-        saveData();
+
+        // check for highscore
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        int easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
+        if (score>easyHighScore) {
+            saveData();
+
+        }
     }
 
     //    This method restarts the game
