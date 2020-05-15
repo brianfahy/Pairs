@@ -26,6 +26,7 @@ public class Activity2 extends AppCompatActivity {
 
 
     @Override
+    // Start of onCreate
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
@@ -45,7 +46,7 @@ public class Activity2 extends AppCompatActivity {
     } // end of onCreate
 
 
-// OnClick Jump to Easy level of game
+    // OnClick Jump to Easy level of game
     public void easyGame(View view) {
         Intent i = new Intent(this, Activity3.class);
         startActivity(i);
@@ -79,11 +80,6 @@ public class Activity2 extends AppCompatActivity {
     }
 
 
-
-
-
-
-
     // persistent data addition
     //method to get data
     public void loadData () {
@@ -93,22 +89,9 @@ public class Activity2 extends AppCompatActivity {
 
     }
 
-    // method to save data
-//    public void saveData() {
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//        editor.putString("keyname1", "Elena");
-//        editor.putInt("keyname2", easyHighScore);
-//        editor.apply();
-//
-//        Toast.makeText(this, "high score saved " + easyHighScore, Toast.LENGTH_SHORT).show();
-//    }
 
     //method to update views
     public void updateViews() {
-
-
 
 //      update easy high scores
         TextView easyScoreView = (TextView) findViewById(R.id.easyScore);
@@ -133,8 +116,6 @@ public class Activity2 extends AppCompatActivity {
 //      update hardHighScore name
         TextView hardNameView = (TextView) findViewById(R.id.hardName);
         hardNameView.setText(hardHighName);
-
-
 
     }
 

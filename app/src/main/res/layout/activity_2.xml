@@ -249,4 +249,6 @@
         android:padding="16dp"
         android:text="Clear High Scores" />
 
+
+
 </LinearLayout>

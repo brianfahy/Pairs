@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -208,6 +209,9 @@ public class Activity3 extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         int easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
         if (score>easyHighScore) {
+
+
+
             saveData();
 
         }
