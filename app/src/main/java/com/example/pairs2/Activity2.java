@@ -34,13 +34,8 @@ public class Activity2 extends AppCompatActivity {
 // get persistently stored name for Easy
         loadData ();
 
-// update all of the views for highscores and names
+// update all of the views for high scores and names
         updateViews();
-
-//      test for change by incrementing score then saving
-        easyHighScore = easyHighScore +1;
-//        save data to persistant log
- //       saveData();
 
 
     } // end of onCreate
@@ -71,6 +66,9 @@ public class Activity2 extends AppCompatActivity {
 
         editor.putString("keyname1", "Brian");
         editor.putInt("keyname2", 0);
+        editor.putString("keyname3", "Brian");
+        editor.putInt("keyname4", 0);
+
         editor.apply();
 
         // refresh all scores
@@ -84,8 +82,10 @@ public class Activity2 extends AppCompatActivity {
     //method to get data
     public void loadData () {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        easyHighName = sharedPreferences.getString("keyname1", "hello"); //"" = default value if none
-        easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
+        easyHighName = sharedPreferences.getString("keyname1", "easy"); //"" = default value if none
+        easyHighScore = sharedPreferences.getInt("keyname2", 11); //"" = default value if none
+        mediumHighName = sharedPreferences.getString("keyname3", "medium"); //"" = default value if none
+        mediumHighScore = sharedPreferences.getInt("keyname4", 22); //"" = default value if none
 
     }
 

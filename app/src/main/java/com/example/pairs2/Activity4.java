@@ -3,6 +3,7 @@ package com.example.pairs2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
@@ -61,6 +62,7 @@ public class Activity4 extends AppCompatActivity {
 
     int score = 0;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     //    START OF onCreate CODE
     @Override
@@ -206,11 +208,15 @@ public class Activity4 extends AppCompatActivity {
         TextView scoreView = (TextView) findViewById(R.id.finish);
         scoreView.setText("Game Over");
 
-//  find the highscore textview for medium level
-//        TextView mediumScoreView = (TextView) findViewById(R.id.mediumScore);
-//        if(score>mediumHighScore) {
-//        mediumScoreView.setText(String.valueOf(score));
+        // check for highscore
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        int easyHighScore = sharedPreferences.getInt("keyname4", 99); //"" = default value if none
+        if (score>easyHighScore) {
 
+
+            saveData();
+
+        }
     }
 
     //    This method restarts the game
@@ -218,6 +224,17 @@ public class Activity4 extends AppCompatActivity {
         Intent i = new Intent(this, Activity2.class);
         startActivity(i);
     }
+        // method to save data
+        public void saveData() {
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putString("keyname3", "Elena");
+            editor.putInt("keyname4", score);
+            editor.apply();
+
+            Toast.makeText(this, "high score saved " + score, Toast.LENGTH_SHORT).show();
+        }
 
 
 }
