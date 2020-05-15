@@ -33,35 +33,12 @@ public class Activity2 extends AppCompatActivity {
 // get persistently stored name for Easy
         loadData ();
 
+// update all of the views for highscores and names
+        updateViews();
 
-
-//      update easy high scores
-        TextView easyScoreView = (TextView) findViewById(R.id.easyScore);
-        easyScoreView.setText(String.valueOf(easyHighScore));
-
-//      update easyHighScore name
-        TextView easyNameView = (TextView) findViewById(R.id.easyName);
-        easyNameView.setText(easyHighName);
-
-//      update medium high scores
-        TextView mediumScoreView = (TextView) findViewById(R.id.mediumScore);
-        mediumScoreView.setText(String.valueOf(mediumHighScore));
-
-//      update mediumHighScore name
-        TextView mediumNameView = (TextView) findViewById(R.id.mediumName);
-        mediumNameView.setText(mediumHighName);
-
-//      update hard high scores
-        TextView hardScoreView = (TextView) findViewById(R.id.hardScore);
-        hardScoreView.setText(String.valueOf(hardHighScore));
-
-//      update hardHighScore name
-        TextView hardNameView = (TextView) findViewById(R.id.hardName);
-        hardNameView.setText(hardHighName);
-
-//
+//      test for change by incrementing score then saving
         easyHighScore = easyHighScore +1;
-//        savedata
+//        save data to persistant log
         saveData();
 
 
@@ -110,6 +87,37 @@ public class Activity2 extends AppCompatActivity {
         Toast.makeText(this, "high score saved " + easyHighScore, Toast.LENGTH_SHORT).show();
     }
 
+    //method to update views
+    public void updateViews() {
 
+
+
+//      update easy high scores
+        TextView easyScoreView = (TextView) findViewById(R.id.easyScore);
+        easyScoreView.setText(String.valueOf(easyHighScore));
+
+//      update easyHighScore name
+        TextView easyNameView = (TextView) findViewById(R.id.easyName);
+        easyNameView.setText(easyHighName);
+
+//      update medium high scores
+        TextView mediumScoreView = (TextView) findViewById(R.id.mediumScore);
+        mediumScoreView.setText(String.valueOf(mediumHighScore));
+
+//      update mediumHighScore name
+        TextView mediumNameView = (TextView) findViewById(R.id.mediumName);
+        mediumNameView.setText(mediumHighName);
+
+//      update hard high scores
+        TextView hardScoreView = (TextView) findViewById(R.id.hardScore);
+        hardScoreView.setText(String.valueOf(hardHighScore));
+
+//      update hardHighScore name
+        TextView hardNameView = (TextView) findViewById(R.id.hardName);
+        hardNameView.setText(hardHighName);
+
+
+
+    }
 
 }
