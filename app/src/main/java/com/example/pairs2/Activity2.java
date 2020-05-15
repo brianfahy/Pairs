@@ -39,7 +39,7 @@ public class Activity2 extends AppCompatActivity {
 //      test for change by incrementing score then saving
         easyHighScore = easyHighScore +1;
 //        save data to persistant log
-        saveData();
+ //       saveData();
 
 
     } // end of onCreate
@@ -75,17 +75,16 @@ public class Activity2 extends AppCompatActivity {
     }
 
     // method to save data
-    public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putString("keyname1", "Elena");
-        editor.putInt("keyname2", easyHighScore);
-        editor.apply();
-
-
-        Toast.makeText(this, "high score saved " + easyHighScore, Toast.LENGTH_SHORT).show();
-    }
+//    public void saveData() {
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//        editor.putString("keyname1", "Elena");
+//        editor.putInt("keyname2", easyHighScore);
+//        editor.apply();
+//
+//        Toast.makeText(this, "high score saved " + easyHighScore, Toast.LENGTH_SHORT).show();
+//    }
 
     //method to update views
     public void updateViews() {

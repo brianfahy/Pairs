@@ -3,6 +3,7 @@ package com.example.pairs2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -59,6 +60,7 @@ public class Activity3 extends AppCompatActivity {
 
     int score = 0;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
 
 //    START OF onCreate CODE
     @Override
@@ -201,6 +203,7 @@ public class Activity3 extends AppCompatActivity {
     public void endGame() {
         TextView scoreView = (TextView) findViewById(R.id.finish);
         scoreView.setText("Game Over");
+        saveData();
     }
 
     //    This method restarts the game
@@ -209,6 +212,17 @@ public class Activity3 extends AppCompatActivity {
         startActivity(i);
     }
 
+    // method to save data
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("keyname1", "Elena");
+        editor.putInt("keyname2", score);
+        editor.apply();
+
+        Toast.makeText(this, "high score saved " + score, Toast.LENGTH_SHORT).show();
+    }
 
 
 
