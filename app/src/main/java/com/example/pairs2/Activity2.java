@@ -3,9 +3,12 @@ package com.example.pairs2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Activity2 extends AppCompatActivity {
 
@@ -18,12 +21,21 @@ public class Activity2 extends AppCompatActivity {
     String mediumHighName = "Lauren";
     String hardHighName = "LizBuff";
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
 
-//      update high scores
+// get persistently stored name for Easy
+        loadData ();
+
+
+
+//      update easy high scores
         TextView easyScoreView = (TextView) findViewById(R.id.easyScore);
         easyScoreView.setText(String.valueOf(easyHighScore));
 
@@ -31,7 +43,7 @@ public class Activity2 extends AppCompatActivity {
         TextView easyNameView = (TextView) findViewById(R.id.easyName);
         easyNameView.setText(easyHighName);
 
-//      update high scores
+//      update medium high scores
         TextView mediumScoreView = (TextView) findViewById(R.id.mediumScore);
         mediumScoreView.setText(String.valueOf(mediumHighScore));
 
@@ -39,7 +51,7 @@ public class Activity2 extends AppCompatActivity {
         TextView mediumNameView = (TextView) findViewById(R.id.mediumName);
         mediumNameView.setText(mediumHighName);
 
-//      update high scores
+//      update hard high scores
         TextView hardScoreView = (TextView) findViewById(R.id.hardScore);
         hardScoreView.setText(String.valueOf(hardHighScore));
 
@@ -47,8 +59,13 @@ public class Activity2 extends AppCompatActivity {
         TextView hardNameView = (TextView) findViewById(R.id.hardName);
         hardNameView.setText(hardHighName);
 
+//
+        easyHighScore = easyHighScore +1;
+//        savedata
+        saveData();
 
-    }
+
+    } // end of onCreate
 
 
 // OnClick Jump to Easy level of game
@@ -68,5 +85,31 @@ public class Activity2 extends AppCompatActivity {
         Intent i = new Intent(this, Activity5.class);
         startActivity(i);
     }
+
+
+
+    // persistent data addition
+    //method to get data
+    public void loadData () {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        easyHighName = sharedPreferences.getString("keyname1", "hello"); //"" = default value if none
+        easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
+
+    }
+
+    // method to save data
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("keyname1", "Elena");
+        editor.putInt("keyname2", easyHighScore);
+        editor.apply();
+
+
+        Toast.makeText(this, "high score saved " + easyHighScore, Toast.LENGTH_SHORT).show();
+    }
+
+
 
 }
