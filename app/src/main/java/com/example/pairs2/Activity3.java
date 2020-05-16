@@ -2,12 +2,16 @@ package com.example.pairs2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -63,11 +67,15 @@ public class Activity3 extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
 
+   // private EditText getName;
+    String getName = "";
+
 //    START OF onCreate CODE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
+
 
 
 //        generate random tile locations for each number
@@ -84,8 +92,8 @@ public class Activity3 extends AppCompatActivity {
         }
 
 
-    }
-//    END OF onCreate CODE
+    }    //    END of onCreate CODE
+
 
 
 
@@ -138,9 +146,6 @@ public class Activity3 extends AppCompatActivity {
             int total1 = tileNumber.get(tagStore) - tileNumber.get(tagValue);
             int total2 = tileNumber.get(tagValue) - tileNumber.get(tagStore);
             boolean match = (total1 == 3 || total2 == 3);
-
-            Log.v ("MainActivity" , " total1= " + total1 + " total2 = " + total2);
-            Log.v ("MainActivity" , " Match = " + match);
 
             if (match){
                 // display a toast message
@@ -210,9 +215,33 @@ public class Activity3 extends AppCompatActivity {
         int easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
         if (score>easyHighScore) {
 
+        // get name- should be a method once working
+       //     getName yourEditText = (EditText) findViewById(R.id.get_name);
+           final EditText yourEditText= (EditText) findViewById(R.id.get_name);
+//           //get keyboard input routine
+            yourEditText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(yourEditText, InputMethodManager.SHOW_IMPLICIT);
 
+            // check for ENTER key pressed before assigning high score name
+            yourEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        // do your stuff here
+                        getName = yourEditText.getText().toString();
 
-            saveData();
+                        //Print test log
+                        Log.v ("MainActivity" , " testpoint1 = " );
+                        Log.v ("MainActivity" , " typed text = " + getName);
+                        //save Data
+                        saveData();
+                        Log.v ("MainActivity" , " saved data done " );
+
+                    }
+                    return false;
+                }
+            });
 
         }
     }
@@ -228,7 +257,7 @@ public class Activity3 extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("keyname1", "Elena");
+        editor.putString("keyname1", getName);
         editor.putInt("keyname2", score);
         editor.apply();
 
