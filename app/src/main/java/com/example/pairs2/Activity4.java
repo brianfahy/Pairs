@@ -2,14 +2,19 @@ package com.example.pairs2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -63,6 +68,8 @@ public class Activity4 extends AppCompatActivity {
     int score = 0;
 
     public static final String SHARED_PREFS = "sharedPrefs";
+
+    String getName = ""; // stores name of person getting highscore
 
     //    START OF onCreate CODE
     @Override
@@ -203,7 +210,7 @@ public class Activity4 extends AppCompatActivity {
         scoreView.setText(String.valueOf(score));
     }
 
-    //     This method ends the game.
+    //     This method runs when at the end of the game.
     public void endGame() {
         TextView scoreView = (TextView) findViewById(R.id.finish);
         scoreView.setText("Game Over");
@@ -211,11 +218,10 @@ public class Activity4 extends AppCompatActivity {
         // check for highscore
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         int easyHighScore = sharedPreferences.getInt("keyname4", 99); //"" = default value if none
-        if (score>easyHighScore) {
+        if (score>easyHighScore) {          // if a new high score is achieved
 
-
-            saveData();
-
+            // call set high score method
+            highScoreRoutine();
         }
     }
 
@@ -229,12 +235,53 @@ public class Activity4 extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.putString("keyname3", "Elena");
+            editor.putString("keyname3", getName);
             editor.putInt("keyname4", score);
             editor.apply();
 
-            Toast.makeText(this, "high score saved " + score, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "high score saved" , Toast.LENGTH_SHORT).show();
         }
+
+
+    //    Call this method when a HighScore is achieved
+    public void highScoreRoutine() {
+
+
+        Toast.makeText(this, "HIGH SCORE !! Enter your name", Toast.LENGTH_SHORT).show();
+
+        // set the EditText view
+        final EditText yourEditText= (EditText) findViewById(R.id.get_name);
+
+        //get keyboard input routine
+        yourEditText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(yourEditText, InputMethodManager.SHOW_IMPLICIT);
+
+        // check for ENTER key pressed before assigning high score name
+        yourEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // when Enter is pressed do the following
+
+                    // assign keyboard input text to getName
+                    getName = yourEditText.getText().toString();
+
+                    // truncate name to no more than 10 characters
+                    if (getName.length() > 10) {
+                        getName = getName.substring(0, 10);
+                    }
+
+                    //save highscore and name
+                    saveData();
+                }
+                return false;
+            }
+        });
+
+
+
+    }
 
 
 }

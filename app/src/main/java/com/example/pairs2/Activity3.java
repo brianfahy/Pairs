@@ -67,8 +67,7 @@ public class Activity3 extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
 
-   // private EditText getName;
-    String getName = "";
+    String getName = "";  // stores name of person getting highscore
 
 //    START OF onCreate CODE
     @Override
