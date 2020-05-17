@@ -21,6 +21,7 @@ public class Activity2 extends AppCompatActivity {
     String mediumHighName = "Lauren";
     String hardHighName = "LizBuff";
 
+    // name of save file
     public static final String SHARED_PREFS = "sharedPrefs";
 
 
@@ -64,9 +65,9 @@ public class Activity2 extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("keyname1", "Brian");
+        editor.putString("keyname1", "Name");
         editor.putInt("keyname2", 0);
-        editor.putString("keyname3", "Brian");
+        editor.putString("keyname3", "Name");
         editor.putInt("keyname4", 0);
 
         editor.apply();
@@ -78,8 +79,7 @@ public class Activity2 extends AppCompatActivity {
     }
 
 
-    // persistent data addition
-    //method to get data
+    //method to get saved data
     public void loadData () {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         easyHighName = sharedPreferences.getString("keyname1", "easy"); //"" = default value if none
