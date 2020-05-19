@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,10 +29,10 @@ public class Activity4 extends AppCompatActivity {
 //  Activity4 = Medium mode with 16 tiles (numbered 0-15)
 
 
+    public static final String SHARED_PREFS = "sharedPrefs";
     //    GLOBAL VARIABLES
 //    tileNumber array = to store random number
     List<Integer> tileNumber = new ArrayList<>();
-
     //    Assign pictures to image array
     Integer[] image = {
             R.drawable.pic1,
@@ -49,26 +50,17 @@ public class Activity4 extends AppCompatActivity {
             R.drawable.pic5,
             R.drawable.pic6,
             R.drawable.pic7,
-            R.drawable.pic8    };
-
+            R.drawable.pic8};
     //    tileCount is 1=first tile, 2=second tile
     int tileCount = 1;
-
     //    pairsCount = how many pairs successfully matched
     int pairsCount = 0;
     int maxPairsCount = 8; // max numbers of pairs
-
-
     //    tagStore = stores number of first tile turned
     int tagStore = 0;
     String tagString = "initial string";
-
-    int tagValue=0;
-
+    int tagValue = 0;
     int score = 0;
-
-    public static final String SHARED_PREFS = "sharedPrefs";
-
     String getName = ""; // stores name of person getting highscore
 
     //    START OF onCreate CODE
@@ -86,9 +78,8 @@ public class Activity4 extends AppCompatActivity {
         Collections.shuffle(tileNumber);
 
 //        display numbers in LogCat
-        for (int index = 0; index < tileNumber.size(); index++)
-        {
-            Log.v ("MainActivity" , index + " loop: " + tileNumber.get(index));
+        for (int index = 0; index < tileNumber.size(); index++) {
+//            Log.v("MainActivity", index + " loop: " + tileNumber.get(index));
         }
 
 
@@ -96,24 +87,22 @@ public class Activity4 extends AppCompatActivity {
 //    END OF onCreate CODE
 
 
-
-
     //    Method for flipping a tile
     public void flipTile(View v) {
-        Log.v ("MainActivity" , " enter flipTile " );
+//        Log.v("MainActivity", " enter flipTile ");
 //        Get the tag info from the button pressed
         String tag = v.getTag().toString();
 
 //        Turn the tag from a string to an int
         tagValue = Integer.parseInt(tag);
 
-        Log.v ("MainActivity" , " tag to int " );
+//        Log.v("MainActivity", " tag to int ");
 
 //        IF FIRST TILE
 //        store tag info
-        if (tileCount ==1) {
+        if (tileCount == 1) {
             tagStore = tagValue;
-            Log.v ("MainActivity" , " first tile " );
+//            Log.v("MainActivity", " first tile ");
             tagString = tag; // copy tag string into tagString
 
 //        find button from tag in button view - look through all buttons in allButtonsView (top level view)
@@ -130,7 +119,7 @@ public class Activity4 extends AppCompatActivity {
 
 
 //        IF SECOND TILE
-        if (tileCount ==2) {
+        if (tileCount == 2) {
 
 //        find button from tag in button view - look through all buttons in allButtonsView (top level view)
             LinearLayout layout = (LinearLayout) findViewById(R.id.allButtonsView16);
@@ -143,16 +132,16 @@ public class Activity4 extends AppCompatActivity {
             button2.setBackgroundResource(image[tileNumber.get(tagValue)]);
 
 //            CHECK IF MATCH
-            Log.v ("MainActivity" , " tagStorepic= " + tileNumber.get(tagStore) + " tagValuepic = " + tileNumber.get(tagValue));
+//            Log.v("MainActivity", " tagStorepic= " + tileNumber.get(tagStore) + " tagValuepic = " + tileNumber.get(tagValue));
 //          note : If these numbers are exactly 8 (half number of tiles) apart there should be a MATCH
             int total1 = tileNumber.get(tagStore) - tileNumber.get(tagValue);
             int total2 = tileNumber.get(tagValue) - tileNumber.get(tagStore);
             boolean match = (total1 == 8 || total2 == 8);
 
-            Log.v ("MainActivity" , " total1= " + total1 + " total2 = " + total2);
-            Log.v ("MainActivity" , " Match = " + match);
+//            Log.v("MainActivity", " total1= " + total1 + " total2 = " + total2);
+//            Log.v("MainActivity", " Match = " + match);
 
-            if (match){
+            if (match) {
                 // display a toast message
                 Toast.makeText(this, "You got a pair!!", Toast.LENGTH_SHORT).show();
 
@@ -170,7 +159,7 @@ public class Activity4 extends AppCompatActivity {
                 updateScore(score);  //calls updateScore method
 
                 pairsCount = pairsCount + 1; // update total pairs matched
-                if (pairsCount==maxPairsCount) {
+                if (pairsCount == maxPairsCount) {
                     endGame(); // finish game
                 }
 
@@ -218,7 +207,7 @@ public class Activity4 extends AppCompatActivity {
         // check for highscore
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         int easyHighScore = sharedPreferences.getInt("keyname4", 99); //"" = default value if none
-        if (score>easyHighScore) {          // if a new high score is achieved
+        if (score > easyHighScore) {          // if a new high score is achieved
 
             // call set high score method
             highScoreRoutine();
@@ -230,17 +219,18 @@ public class Activity4 extends AppCompatActivity {
         Intent i = new Intent(this, Activity2.class);
         startActivity(i);
     }
-        // method to save data
-        public void saveData() {
-            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.putString("keyname3", getName);
-            editor.putInt("keyname4", score);
-            editor.apply();
+    // method to save data
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            Toast.makeText(this, "high score saved" , Toast.LENGTH_SHORT).show();
-        }
+        editor.putString("keyname3", getName);
+        editor.putInt("keyname4", score);
+        editor.apply();
+
+        Toast.makeText(this, "high score saved", Toast.LENGTH_SHORT).show();
+    }
 
 
     //    Call this method when a HighScore is achieved
@@ -250,7 +240,7 @@ public class Activity4 extends AppCompatActivity {
         Toast.makeText(this, "HIGH SCORE !! Enter your name", Toast.LENGTH_SHORT).show();
 
         // set the EditText view
-        final EditText yourEditText= (EditText) findViewById(R.id.get_name);
+        final EditText yourEditText = (EditText) findViewById(R.id.get_name);
 
         //get keyboard input routine
         yourEditText.requestFocus();
@@ -278,7 +268,6 @@ public class Activity4 extends AppCompatActivity {
                 return false;
             }
         });
-
 
 
     }

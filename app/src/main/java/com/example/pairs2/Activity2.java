@@ -10,8 +10,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pairs2.R;
+
 public class Activity2 extends AppCompatActivity {
 
+    // name of save file
+    public static final String SHARED_PREFS = "sharedPrefs";
     // Global variables
     // High Scores
     int easyHighScore = 1;
@@ -21,11 +25,6 @@ public class Activity2 extends AppCompatActivity {
     String mediumHighName = "Lauren";
     String hardHighName = "LizBuff";
 
-    // name of save file
-    public static final String SHARED_PREFS = "sharedPrefs";
-
-
-
     @Override
     // Start of onCreate
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
 
 // get persistently stored name for Easy
-        loadData ();
+        loadData();
 
 // update all of the views for high scores and names
         updateViews();
@@ -54,7 +53,7 @@ public class Activity2 extends AppCompatActivity {
         startActivity(i);
     }
 
-    // OnClick Jump to Easy level of game
+    // OnClick Jump to Hard level of game
     public void hardGame(View view) {
         Intent i = new Intent(this, Activity5.class);
         startActivity(i);
@@ -69,24 +68,27 @@ public class Activity2 extends AppCompatActivity {
         editor.putInt("keyname2", 0);
         editor.putString("keyname3", "Name");
         editor.putInt("keyname4", 0);
+        editor.putString("keyname5", "Name");
+        editor.putInt("keyname6", 0);
 
         editor.apply();
 
         // refresh all scores
-        loadData ();
+        loadData();
         updateViews();
-        Toast.makeText(this, "high score cleared " , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "high score cleared ", Toast.LENGTH_SHORT).show();
     }
 
 
     //method to get saved data
-    public void loadData () {
+    public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        easyHighName = sharedPreferences.getString("keyname1", "easy"); //"" = default value if none
-        easyHighScore = sharedPreferences.getInt("keyname2", 11); //"" = default value if none
-        mediumHighName = sharedPreferences.getString("keyname3", "medium"); //"" = default value if none
-        mediumHighScore = sharedPreferences.getInt("keyname4", 22); //"" = default value if none
-
+        easyHighName = sharedPreferences.getString("keyname1", "name"); //"" = default value if none
+        easyHighScore = sharedPreferences.getInt("keyname2", 0); //"" = default value if none
+        mediumHighName = sharedPreferences.getString("keyname3", "name"); //"" = default value if none
+        mediumHighScore = sharedPreferences.getInt("keyname4", 0); //"" = default value if none
+        hardHighName = sharedPreferences.getString("keyname5", "name"); //"" = default value if none
+        hardHighScore = sharedPreferences.getInt("keyname6", 0); //"" = default value if none
     }
 
 

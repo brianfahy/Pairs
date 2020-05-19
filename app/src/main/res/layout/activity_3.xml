@@ -127,7 +127,7 @@
         android:id="@+id/get_name"
         android:layout_marginTop="450dp"
         android:imeOptions="actionDone"
-        android:inputType="textImeMultiLine"
+        android:inputType="textNoSuggestions"
         android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -28,11 +28,11 @@ public class Activity3 extends AppCompatActivity {
 //  Activity3 = Easy mode with 6 tiles (numbered 0-5)
 
 
-//    GLOBAL VARIABLES
+    public static final String SHARED_PREFS = "sharedPrefs";
+    //    GLOBAL VARIABLES
 //    tileNumber array = to store random number
     List<Integer> tileNumber = new ArrayList<>();
-
-//    Assign pictures to image array
+    //    Assign pictures to image array
 //    Integer[] image = {
 //            R.drawable.pic1,
 //            R.drawable.pic2,
@@ -47,34 +47,24 @@ public class Activity3 extends AppCompatActivity {
             R.drawable.l3,
             R.drawable.l1,
             R.drawable.l2,
-            R.drawable.l3 };
-
-//    tileCount is 1=first tile, 2=second tile
+            R.drawable.l3};
+    //    tileCount is 1=first tile, 2=second tile
     int tileCount = 1;
-
-//    pairsCount = how many pairs successfully matched
+    //    pairsCount = how many pairs successfully matched
     int pairsCount = 0;
-    int maxPairsCount =3; // max numbers of pairs
-
-
+    int maxPairsCount = 3; // max numbers of pairs
     //    tagStore = stores number of first tile turned
     int tagStore = 0;
     String tagString = "initial string";
-
-    int tagValue=0;
-
+    int tagValue = 0;
     int score = 0;
-
-    public static final String SHARED_PREFS = "sharedPrefs";
-
     String getName = "";  // stores name of person getting highscore
 
-//    START OF onCreate CODE
+    //    START OF onCreate CODE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
-
 
 
 //        generate random tile locations for each number
@@ -85,19 +75,15 @@ public class Activity3 extends AppCompatActivity {
         Collections.shuffle(tileNumber);
 
 //        display numbers in LogCat
-        for (int index = 0; index < tileNumber.size(); index++)
-        {
-            Log.v ("MainActivity" , index + " loop: " + tileNumber.get(index));
+        for (int index = 0; index < tileNumber.size(); index++) {
+//            Log.v("MainActivity", index + " loop: " + tileNumber.get(index));
         }
 
 
     }    //    END of onCreate CODE
 
 
-
-
-
-//    Method for flipping a tile
+    //    Method for flipping a tile
     public void flipTile(View v) {
 //        Get the tag info from the button pressed
         String tag = v.getTag().toString();
@@ -108,7 +94,7 @@ public class Activity3 extends AppCompatActivity {
 
 //        IF FIRST TILE
 //        store tag info
-        if (tileCount ==1) {
+        if (tileCount == 1) {
             tagStore = tagValue;
 
             tagString = tag; // copy tag string into tagString
@@ -127,7 +113,7 @@ public class Activity3 extends AppCompatActivity {
 
 
 //        IF SECOND TILE
-        if (tileCount ==2) {
+        if (tileCount == 2) {
 
 //        find button from tag in button view - look through all buttons in allButtonsView (top level view)
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.allButtonsView);
@@ -140,13 +126,13 @@ public class Activity3 extends AppCompatActivity {
             button2.setBackgroundResource(image[tileNumber.get(tagValue)]);
 
 //            CHECK IF MATCH
-            Log.v ("MainActivity" , " tagStorepic= " + tileNumber.get(tagStore) + " tagValuepic = " + tileNumber.get(tagValue));
+//            Log.v("MainActivity", " tagStorepic= " + tileNumber.get(tagStore) + " tagValuepic = " + tileNumber.get(tagValue));
 //          note : If these numbers are exactly 3 (half number of tiles) apart there should be a MATCH
             int total1 = tileNumber.get(tagStore) - tileNumber.get(tagValue);
             int total2 = tileNumber.get(tagValue) - tileNumber.get(tagStore);
             boolean match = (total1 == 3 || total2 == 3);
 
-            if (match){
+            if (match) {
                 // display a toast message
                 Toast.makeText(this, "You got a pair!!", Toast.LENGTH_SHORT).show();
 
@@ -164,8 +150,8 @@ public class Activity3 extends AppCompatActivity {
                 updateScore(score);  //calls updateScore method
 
                 pairsCount = pairsCount + 1; // update total pairs matched
-                if (pairsCount==maxPairsCount) {
-                endGame(); // finish game
+                if (pairsCount == maxPairsCount) {
+                    endGame(); // finish game
                 }
 
                 //        reset tile count and jump out of method
@@ -198,7 +184,7 @@ public class Activity3 extends AppCompatActivity {
     }
 
 
-//     This method updates the score.
+    //     This method updates the score.
     public void updateScore(int score) {
         TextView scoreView = (TextView) findViewById(R.id.score_view);
         scoreView.setText(String.valueOf(score));
@@ -212,7 +198,7 @@ public class Activity3 extends AppCompatActivity {
         // check for highscore
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         int easyHighScore = sharedPreferences.getInt("keyname2", 99); //"" = default value if none
-        if (score>easyHighScore) {          // if a new high score is achieved
+        if (score > easyHighScore) {          // if a new high score is achieved
 
             // call set high score method
             highScoreRoutine();
@@ -234,7 +220,7 @@ public class Activity3 extends AppCompatActivity {
         editor.putInt("keyname2", score);
         editor.apply();
 
-        Toast.makeText(this, "high score saved" , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "high score saved", Toast.LENGTH_SHORT).show();
     }
 
     //    Call this method when a HighScore is achieved
@@ -244,7 +230,7 @@ public class Activity3 extends AppCompatActivity {
         Toast.makeText(this, "HIGH SCORE !! Enter your name", Toast.LENGTH_SHORT).show();
 
         // set the EditText view
-        final EditText yourEditText= (EditText) findViewById(R.id.get_name);
+        final EditText yourEditText = (EditText) findViewById(R.id.get_name);
 
         //get keyboard input routine
         yourEditText.requestFocus();
@@ -272,7 +258,6 @@ public class Activity3 extends AppCompatActivity {
                 return false;
             }
         });
-
 
 
     }
