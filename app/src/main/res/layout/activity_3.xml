@@ -1,135 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/allButtonsView"
-    tools:context=".Activity3">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
+        android:id="@+id/allButtonsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        tools:context=".Activity3">
 
-    <Button
-        android:id="@+id/button_e0"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/button_e1"
-        android:layout_toLeftOf="@+id/button_e1"
-        android:cursorVisible="false"
-        android:focusableInTouchMode="false"
-        android:onClick="flipTile"
-        android:tag="0"
-        android:text="1" />
 
-    <Button
-        android:id="@+id/button_e1"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:onClick="flipTile"
-        android:tag="1"
-        android:text="2" />
+        <!--Easy Game-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
-    <Button
-        android:id="@+id/button_e2"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/button_e1"
-        android:layout_toRightOf="@+id/button_e1"
-        android:onClick="flipTile"
-        android:tag="2"
-        android:text="3" />
+            <Button
+                android:id="@+id/button_e0"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="0"
+                android:text="1" />
 
-    <Button
-        android:id="@+id/button_e3"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/button_e4"
-        android:layout_toLeftOf="@+id/button_e4"
-        android:onClick="flipTile"
-        android:tag="3"
-        android:text="4" />
+            <Button
+                android:id="@+id/button_e1"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="1"
+                android:text="2" />
 
-    <Button
-        android:id="@+id/button_e4"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:onClick="flipTile"
-        android:tag="4"
-        android:text="5" />
+            <Button
+                android:id="@+id/button_e2"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="2"
+                android:text="3" />
 
-    <Button
-        android:id="@+id/button_e5"
-        android:layout_width="120sp"
-        android:layout_height="120sp"
-        android:layout_alignTop="@+id/button_e4"
-        android:layout_toRightOf="@+id/button_e4"
-        android:onClick="flipTile"
-        android:tag="5"
-        android:text="6" />
 
-    <TextView
-        android:id="@+id/score_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:background="#3f00"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text="Score"
-        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/score_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:background="#3f00"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text="0000"
-        android:textSize="20sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text=""
-        android:textSize="40sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
-        android:onClick="backToStart"
-        android:padding="16dp"
-        android:text="Back" />
+            <Button
+                android:id="@+id/button_e3"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="3"
+                android:text="4" />
 
-    <EditText
-        android:id="@+id/get_name"
-        android:layout_marginTop="450dp"
-        android:imeOptions="actionDone"
-        android:inputType="textNoSuggestions"
-        android:background="@null"
-        android:layout_width="1dp"
-        android:layout_height="1dp"/>
+            <Button
+                android:id="@+id/button_e4"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="4"
+                android:text="5" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/button_e5"
+                android:layout_width="0sp"
+                android:layout_height="120sp"
+                android:layout_weight="1"
+                android:onClick="flipTile"
+                android:tag="5"
+                android:text="6" />
+
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/score_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#3f00"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="Score"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/score_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#3f00"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="0000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text=""
+            android:textSize="40sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:onClick="backToStart"
+                android:text="Back" />
+
+            <EditText
+                android:id="@+id/get_name"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:inputType="textNoSuggestions" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -100,7 +100,7 @@ public class Activity3 extends AppCompatActivity {
             tagString = tag; // copy tag string into tagString
 
 //        find button from tag in button view - look through all buttons in allButtonsView (top level view)
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.allButtonsView);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.allButtonsView);
             Button button1 = (Button) layout.findViewWithTag(tag);
 
 //        flip tile to corresponding picture
@@ -116,7 +116,7 @@ public class Activity3 extends AppCompatActivity {
         if (tileCount == 2) {
 
 //        find button from tag in button view - look through all buttons in allButtonsView (top level view)
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.allButtonsView);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.allButtonsView);
             final Button button2 = (Button) layout.findViewWithTag(tag); //final as accessed within inner class
 
             // find first tile from saved tag (tagString)
